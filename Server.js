@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
-app.use(express.static('demo'));
+app.use(express.static('public'));
 
 function listening(){
    console.log("server running"); 
@@ -16,7 +16,15 @@ function listening(){
 };
 
 app.get('/', function (req, res) {
-   res.send('Hello World!');
+   res.sendFile(__dirname + '/index.html');
  });
 const server = app.listen(port, listening);
 
+const data = [];
+
+app.post('/addMovie', addMovie);
+
+function addMovie (req, res){
+   data.push(req.body);
+   console.log(data);
+};
