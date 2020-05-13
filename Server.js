@@ -20,6 +20,14 @@ app.get('/', function (req, res) {
  });
 const server = app.listen(port, listening);
 
+const urlencodedParser = bodyParser.urlencoded({extended: false});
+
+app.post("/", urlencodedParser, function (request, response) {
+   if(!request.body) return response.sendStatus(400);
+   console.log(request.body);
+   response.send(`${request.body.idCity} - ${request.body.Date}`);
+});
+
 const data = [];
 
 app.post('/addMovie', addMovie);
