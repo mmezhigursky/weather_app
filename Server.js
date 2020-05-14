@@ -24,7 +24,7 @@ const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 app.post("/", urlencodedParser, function (request, response) {
    if(!request.body) return response.sendStatus(400);
-   console.log(request.body);
+   console.log(request.body, `${request.body.idCity} - ${request.body.Date}`);
    response.send(`${request.body.idCity} - ${request.body.Date}`);
 });
 
@@ -34,5 +34,5 @@ app.post('/addMovie', addMovie);
 
 function addMovie (req, res){
    data.push(req.body);
-   console.log(data);
+   console.log(data, "данные с бэка");
 };

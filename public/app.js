@@ -1,5 +1,5 @@
 const postData = async ( url = '', data = {})=>{
-    console.log(data);
+    console.log(data, "данные с фронта");
       const response = await fetch(url, {
       method: 'POST', 
       credentials: 'same-origin',
@@ -12,7 +12,7 @@ const postData = async ( url = '', data = {})=>{
 
       try {
         const newData = await response.json();
-        console.log(newData);
+        console.log(newData, 'вызов из postData');
         return newData;
       }catch(error) {
       console.log("error", error);
@@ -28,3 +28,18 @@ const token = '5b48b5ac884461bd4e3f64a246fb35d7'
 function getWeatherData(id, ){
 
 }
+
+const fetchPromise = fetch("https://ghibliapi.herokuapp.com/people");
+console.log(fetchPromise);
+
+const fetchPromise2 = fetch("https://ghibliapi.herokuapp.com/people");
+fetchPromise.then(response => {
+  console.log(response);
+});
+
+const fetchPromise3 = fetch("https://ghibliapi.herokuapp.com/people");
+fetchPromise.then(response => {
+  return response.json();
+}).then(people => {
+  console.log(people);
+});
