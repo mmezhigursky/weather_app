@@ -19,15 +19,52 @@ const postData = async ( url = '', data = {})=>{
       }
   }
 
-postData('/addMovie', {movie:'The Matrix', score: 5});
-postData('/addMovie', {movie:'The NonMatrix', score: 5.5});
+document.getElementById('main_btn').addEventListener('click', getWeatherData);
+  
 
-const url = 'http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=5b48b5ac884461bd4e3f64a246fb35d7'
-const token = '5b48b5ac884461bd4e3f64a246fb35d7'
 
-function getWeatherData(id, ){
 
+
+// postData('/addMovie', {movie:'The Matrix', score: 5});
+// postData('/addMovie', {movie:'The NonMatrix', score: 5.5});
+
+const baseURL = `http://api.openweathermap.org/data/2.5/forecast?id=${city}&date=${date}&APPID=${token}`
+
+
+function getWeatherData(){
+  const city =  document.getElementById('city').value;
+  const date =  document.getElementById('date').value;
+  console.log(city, date)
 }
+
+ 
+
+
+
+
+const getAnimal = async (baseURL, city, date)=>{
+  const token = '5b48b5ac884461bd4e3f64a246fb35d7';
+  const res = await fetch(baseURL+animal+key)
+  try {
+
+    const data = await res.json();
+    console.log(data)
+    return data;
+  }  catch(error) {
+    console.log("error", error);
+    // appropriately handle the error
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 const fetchPromise = fetch("https://ghibliapi.herokuapp.com/people");
 console.log(fetchPromise);
