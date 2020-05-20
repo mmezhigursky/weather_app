@@ -1,38 +1,30 @@
-// Загружаем HTTP модуль
-const port = 8000;
-const express = require('express');
+// Setup empty JS object to act as endpoint for all routes
+projectData = {};
+
+// Require Express to run server and routes
+const express = require("express");
+
+// Start up an instance of app
 const app = express();
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
+
+/* Middleware*/
+const bodyParser = require("body-parser");
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const cors = require('cors');
+
+// Cors for cross origin allowance
+const cors = require("cors");
 app.use(cors());
 
-app.use(express.static('public'));
+// Initialize the main project folder
+app.use(express.static("public"));
 
-function listening(){
-   console.log("server running"); 
-   console.log(`running on localhost: ${port}`);
-};
+// Setup Server
+const port = 8080;
 
-app.get('/', function (req, res) {
-   res.sendFile(__dirname + '/index.html');
- });
 const server = app.listen(port, listening);
+function listening() {
+  console.log(`sever is running at port: ${port}`);
+}
 
-const urlencodedParser = bodyParser.urlencoded({extended: false});
-
-app.post("/", urlencodedParser, function (request, response) {
-   if(!request.body) return response.sendStatus(400);
-   console.log(request.body, `${request.body.idCity} - ${request.body.Date}`);
-   response.send(`${request.body.idCity} - ${request.body.Date}`);
-});
-
-const data = [];
-
-app.post('/addMovie', addMovie);
-
-function addMovie (req, res){
-   data.push(req.body);
-   console.log(data, "данные с бэка");
-};

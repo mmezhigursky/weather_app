@@ -28,13 +28,15 @@ document.getElementById('main_btn').addEventListener('click', getWeatherData);
 // postData('/addMovie', {movie:'The Matrix', score: 5});
 // postData('/addMovie', {movie:'The NonMatrix', score: 5.5});
 
-const baseURL = `http://api.openweathermap.org/data/2.5/forecast?id=${city}&date=${date}&APPID=${token}`
 
 
-function getWeatherData(){
+
+async function getWeatherData(){
   const city =  document.getElementById('city').value;
   const date =  document.getElementById('date').value;
-  console.log(city, date)
+  const dataFrom = getDataAPI(city).then(function(dataFrom){
+    console.log('dataFrom:', dataFrom);
+  });
 }
 
  
@@ -42,19 +44,27 @@ function getWeatherData(){
 
 
 
-const getAnimal = async (baseURL, city, date)=>{
+const getDataAPI = async (city)=>{
   const token = '5b48b5ac884461bd4e3f64a246fb35d7';
-  const res = await fetch(baseURL+animal+key)
+  let baseURL = `https://api.openweathermap.org/data/2.5/forecast?id=${city}&APPID=${token}`;
+  console.log('конечный урл', baseURL);
+
+  const res = await fetch(baseURL);
   try {
-
     const data = await res.json();
-    console.log(data)
     return data;
-  }  catch(error) {
+  } catch (error) {
     console.log("error", error);
-    // appropriately handle the error
   }
-}
+};
+ 
+
+  // const data =  res.json();
+  // console.log(data, 'from API')
+  // console.log(data)
+  // return data;
+  // console.log("error", error, error.message);
+    // appropriately handle the error
 
 
 
@@ -62,21 +72,19 @@ const getAnimal = async (baseURL, city, date)=>{
 
 
 
+// const fetchPromise = fetch("https://ghibliapi.herokuapp.com/people");
+// console.log(fetchPromise);
+
+// const fetchPromise2 = fetch("https://ghibliapi.herokuapp.com/people");
+// fetchPromise.then(response => {
+//   console.log(response);
+// });
+
+// const fetchPromise3 = fetch("https://ghibliapi.herokuapp.com/people");
+// fetchPromise.then(response => {
+//   return response.json();
+// }).then(people => {
+//   console.log(people);
+// });
 
 
-
-
-const fetchPromise = fetch("https://ghibliapi.herokuapp.com/people");
-console.log(fetchPromise);
-
-const fetchPromise2 = fetch("https://ghibliapi.herokuapp.com/people");
-fetchPromise.then(response => {
-  console.log(response);
-});
-
-const fetchPromise3 = fetch("https://ghibliapi.herokuapp.com/people");
-fetchPromise.then(response => {
-  return response.json();
-}).then(people => {
-  console.log(people);
-});
