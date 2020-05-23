@@ -43,6 +43,7 @@ h2,h1,h3{
     /* grid-auto-rows: minmax(400px, auto); */
     grid-template-columns:1fr;
     grid-template-areas: "main"
+                          "res"
                          "footer";
     justify-items: center;
     /* border: red 2px solid; */
@@ -91,6 +92,15 @@ h2,h1,h3{
       align-content: center;
       /* border: orange 2px solid; */
   }
+
+  #res{
+    grid-area:res;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-content: center;
+    /* border: orange 2px solid; */
+}
   
 
 @media(min-width:900px){
@@ -103,6 +113,7 @@ h2,h1,h3{
     /* grid-auto-rows: minmax(400px, auto); */
     grid-template-columns: repeat(12, 1fr);
     grid-template-areas: "main main main main main main main main main main main main"
+                          "res res res res res res res res res res res res"
                          "footer footer footer footer footer footer footer footer footer footer footer footer";
     justify-content: center;
     /* border: red 2px solid; */
@@ -115,6 +126,13 @@ h2,h1,h3{
     justify-content: space-around;
     align-content: center;
     /* border: orange 2px solid; */
+}
+#res{
+  grid-area:res;
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  /* border: orange 2px solid; */
 }
 
 .form_group{

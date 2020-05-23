@@ -3,7 +3,6 @@
 <head>
 	<meta charset="utf-8" />
     <title>Test Website</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<meta name="robots" content="all,index,follow" />
@@ -11,22 +10,30 @@
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script> 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
  <div class="container">
         <section id="main" class="section" >
             <div class="form_group">
-                <form action="" method="">
+                <div>
                     <label for="idCity">id of the City:</label><br>
-                    <input type="text" id="city" name="idCity" value="728334"><br>
-                    <label for="date">Date:</label><br>
-                    <input type="text" id="date" name="Date" value="05/04/20"><br><br>
-                    <input  id = "main_btn"type="submit" value="Submit">
-                  </form>
+                    <input type="text" placeholder="enter zip code here" id="city" name="idCity" ><br>
+                    <textarea id="feelings"></textarea> <br>
+                    <input  id = "generate"type="submit" value="generate">
+                  </div>
             </div>
-            
+        </section>
+
+        <section id="res" class="section">
+            <div>Last call</div>
+            <div id="entryHolder">
+                <div id='date'></div>
+                <div id='zip'></div>
+                <div id='content'></div>
+                <div id='temp'></div>
+                
+            </div>
         </section>
  
     
