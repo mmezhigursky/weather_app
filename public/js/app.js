@@ -30,19 +30,48 @@ const postData = async ( url = '', data = {})=>{
     }
 }
 
-//create click listener for calling chain of functions 
+//create click listener for calling chain of functions  
 document.getElementById('generate').addEventListener('click', getWeatherData);
 
 
 //main function with chain of functions
 async function getWeatherData(){
-  const city =  document.getElementById('city').value;
-  const feelings =  document.getElementById('feelings').value;
-  const dataFrom = getDataAPI(city).then(function(dataFrom){
-  console.log('dataFrom:', dataFrom);
-  postData('/addWeatherData', {temp:dataFrom.main.temp, day:day_today, feel:feelings, zip:city});
-  UpdateUI();
-});
+  let city =  document.getElementById('city').value;
+  let feelings =  document.getElementById('feelings').value;
+  let pattern = /\d/;
+  if(city===""){
+    alert("You didn't fill fields, fields were filled by default values.");
+    document.getElementById('city').value = 94040;
+    if(feelings ===""){
+      document.getElementById('feelings').value = 'I feel good';
+      return
+    }
+    return
+  }
+  else if(feelings ===""){
+    document.getElementById('feelings').value = 'I feel good';
+    return
+  }
+  try {
+    const dataFrom = getDataAPI(city).then(function(dataFrom){
+    console.log('dataFrom:', dataFrom);
+    if(dataFrom.message === 'city not found'){
+      document.getElementById('error').innerHTML = 'error = city not found';
+      document.getElementById('temp').innerHTML = '';
+      document.getElementById('date').innerHTML = '';
+      document.getElementById('content').innerHTML = '';
+      document.getElementById('zip').innerHTML = '';
+    }
+    else{
+      document.getElementById('error').innerHTML = '';
+      postData('/addWeatherData', {temp:dataFrom.main.temp, day:day_today, feel:feelings, zip:city});
+      UpdateUI();
+    } });
+    
+  } catch (error) {
+    alert(error)
+  }
+
 }
 
 
